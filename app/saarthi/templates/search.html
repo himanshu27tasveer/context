@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+	
+	<div class="bg-dark">
+		<pre style="font-size: 24px;color: white;height: 10vh;text-align: center;">Email: {{ email }}              User Id : {{ user_id }}</pre>
+	</div>
+
+	
+
+	<div style="width: 60%;margin-left: 20%;margin-top: 10vh;color: #adadad;">
+    	 <div class="content-section">
+            <form method="post" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4 text-info">Search Here</legend>
+                    
+                    <div class="form-group">
+                        {{form.url.label(class="form-control-label text-dark")}}
+                        {% if form.url.errors %}
+                            {{form.url(class="form-control form-control-lg is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.url.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.url(class="form-control form-control-lg")}}
+                        {% endif %}
+     
+                    </div>
+                
+                </fieldset>
+                <div class="form-group">
+                    {{form.submit(class="btn btn-outline-info")}}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <div>
+        <table width="80%" class="table table-hover">
+          <thead>
+            <tr class="thead-dark">
+              <th scope="col">id</th>
+              <th scope="col">Url</th>
+              <th scope="col">Content</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in data %}
+            <tr style="height: 100px">
+              <th scope="row">{{ loop.index }}</th>
+              <td><a href="{{ row.url }}">{{ row.url }}</a></td>
+              <td>{{ row.content }}</td>
+              <td>{{ row.curr_date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+	
+	<div class="bg-dark" style="width: 100vw">
+		<pre style="font-size: 24px;color: white;height: 10vh;text-align: center;">Email: {{ email }}              User Id : {{ user_id }}</pre>
+        <a style="margin-bottom: 5px;float: right;margin-right: 30px" class="btn btn-outline-danger" href="{{ request.referrer }}"> <-- Back</a>
+	</div>
+
+	
+
+	<textarea cols="100" style="width: 80vw;height: 80vh;margin-left: 10vw"; >
+        {{ content }}
+    </textarea>
+
+    <br/><br/>
+
+    <div>
+        <table class="table table-hover">
+          <thead>
+            <tr class="thead-dark">
+              <th scope="col">id</th>
+              <th scope="col">Url</th>
+              <th scope="col">Content</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in data %}
+            <tr>
+              <th scope="row">{{ loop.index }}</th>
+              <td><a href="{{ row.url }}">{{ row.url }}</a></td>
+              <td>{{ row.content }}</td>
+              <td>{{ row.curr_date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+
+{% endblock %}
